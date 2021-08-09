@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  input,
+  textarea {
+    padding: 1em;
+    margin-bottom: 1em;
+    border: 1px solid dodgerblue;
+    resize: none;
+    font-size: 1em;
+    overflow: hidden;
+  }
+
+  button {
+    padding: 1em;
+    background: purple;
+    color: #fff;
+    border-radius: 3px;
+  }
+}
