@@ -74,7 +74,7 @@ export default function Home({ posts }) {
 // };
 
 export const getStaticProps = async (ctx) => {
-  const { API, Auth } = withSSRContext(ctx);
+  const { API } = withSSRContext(ctx);
   let posts = [];
   try {
     const res = await API.graphql(graphqlOperation(listPosts));
