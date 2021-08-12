@@ -1,6 +1,12 @@
 type Post
   @model
-  @auth(rules: [{ allow: owner, operations: [create, delete, update] }]) {
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, delete, update] }
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   postTitle: String!
   postBody: ID!

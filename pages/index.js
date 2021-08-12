@@ -3,7 +3,8 @@ import styles from "../styles/Home.module.css";
 import { useState, useEffect } from "react";
 import { createPost } from "../src/graphql/mutations";
 import { listPosts } from "../src/graphql/queries";
-import { API, graphqlOperation, withSSRContext } from "aws-amplify";
+import { API, graphqlOperation, withSSRContext, Auth } from "aws-amplify";
+import { AmplifySignOut } from "@aws-amplify/ui-react";
 
 export default function Home({ posts }) {
   const [postTitle, setPostTitle] = useState("");
@@ -32,6 +33,7 @@ export default function Home({ posts }) {
         <meta name="author" content="Sam Odiagbe" />
       </Head>
       <div className={styles.createPostContainer}>
+        <AmplifySignOut />
         <form onSubmit={createNewPost}>
           <div>
             <input
