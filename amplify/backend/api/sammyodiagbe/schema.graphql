@@ -3,7 +3,7 @@ type Post
   @auth(
     rules: [
       { allow: owner, operations: [create, delete, update] }
-      { allow: public, operations: [read] }
+      { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read] }
     ]
   ) {
