@@ -1,6 +1,72 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateComment = /* GraphQL */ `
+  subscription OnCreateComment {
+    onCreateComment {
+      id
+      postID
+      content
+      createdAt
+      updatedAt
+      post {
+        id
+        postTitle
+        postBody
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const onUpdateComment = /* GraphQL */ `
+  subscription OnUpdateComment {
+    onUpdateComment {
+      id
+      postID
+      content
+      createdAt
+      updatedAt
+      post {
+        id
+        postTitle
+        postBody
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
+export const onDeleteComment = /* GraphQL */ `
+  subscription OnDeleteComment {
+    onDeleteComment {
+      id
+      postID
+      content
+      createdAt
+      updatedAt
+      post {
+        id
+        postTitle
+        postBody
+        comments {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+    }
+  }
+`;
 export const onCreatePost = /* GraphQL */ `
   subscription OnCreatePost {
     onCreatePost {
@@ -64,72 +130,6 @@ export const onDeletePost = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-    }
-  }
-`;
-export const onCreateComment = /* GraphQL */ `
-  subscription OnCreateComment {
-    onCreateComment {
-      id
-      postID
-      post {
-        id
-        postTitle
-        postBody
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateComment = /* GraphQL */ `
-  subscription OnUpdateComment {
-    onUpdateComment {
-      id
-      postID
-      post {
-        id
-        postTitle
-        postBody
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteComment = /* GraphQL */ `
-  subscription OnDeleteComment {
-    onDeleteComment {
-      id
-      postID
-      post {
-        id
-        postTitle
-        postBody
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      content
-      createdAt
-      updatedAt
     }
   }
 `;
