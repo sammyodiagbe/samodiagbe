@@ -20,4 +20,26 @@
     color: #fff;
     border-radius: 3px;
   }
+
+  div.contentContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    max-width: 700px;
+
+    div.postsContainer {
+      display: grid;
+      row-gap: 1em;
+      div.apost {
+        padding: 1em;
+        border: 1px solid dodgerblue;
+        border-radius: 5px;
+        color: #455;
+        h2 {
+          padding-bottom: 1em;
+          color: dodgerblue;
+        }
+      }
+    }
+  }
 }

@@ -22,9 +22,18 @@ export default function Home({ posts }) {
     }
   };
 
-  useEffect(() => {
-    console.log(posts);
-  }, []);
+  const renderPosts = posts.length ? (
+    posts.map((post, index) => {
+      return (
+        <div className={styles.apost} key={index}>
+          <h2>{post.postTitle}</h2>
+          <p>{post.postBody}</p>
+        </div>
+      );
+    })
+  ) : (
+    <p>No posts oo</p>
+  );
   return (
     <div className={styles.container}>
       <Head>
@@ -32,30 +41,32 @@ export default function Home({ posts }) {
         <meta name="description" content="Sam Odiagbe blog" />
         <meta name="author" content="Sam Odiagbe" />
       </Head>
-      <div className={styles.createPostContainer}>
-        <AmplifySignOut />
-        <form onSubmit={createNewPost}>
-          <div>
-            <input
-              type="text"
-              placeholder="Post title"
-              onChange={(e) => setPostTitle(e.target.value)}
-              value={postTitle}
-            />
-          </div>
-          <div>
-            <textarea
-              placeholder="Post body"
-              onChange={(e) => setPostBody(e.target.value)}
-              value={postBody}
-            />
-          </div>
-          <div>
-            <button>Create post</button>
-          </div>
-        </form>
+      <div className={styles.contentContainer}>
+        <div className={styles.createPostContainer}>
+          <AmplifySignOut />
+          <form onSubmit={createNewPost}>
+            <div>
+              <input
+                type="text"
+                placeholder="Post title"
+                onChange={(e) => setPostTitle(e.target.value)}
+                value={postTitle}
+              />
+            </div>
+            <div>
+              <textarea
+                placeholder="Post body"
+                onChange={(e) => setPostBody(e.target.value)}
+                value={postBody}
+              />
+            </div>
+            <div>
+              <button>Create post</button>
+            </div>
+          </form>
+        </div>
+        <div className={styles.postsContainer}>{renderPosts}</div>
       </div>
-      <div className={styles.postsContainer}></div>
     </div>
   );
 }
@@ -79,9 +90,12 @@ export const getStaticProps = async (ctx) => {
   const { API } = withSSRContext(ctx);
   let posts = [];
   try {
-    const res = await API.graphql(graphqlOperation(listPosts));
+    const res = await API.graphql({ query: listPosts, authMode: "AWS_IAM" });
     console.log(res);
-    posts = res.data;
+    const {
+      listPosts: { items },
+    } = res.data;
+    posts = items;
   } catch (err) {
     console.log("There was an error, ", err);
   }
@@ -90,5 +104,6 @@ export const getStaticProps = async (ctx) => {
     props: {
       posts,
     },
+    revalidate: 30,
   };
 };

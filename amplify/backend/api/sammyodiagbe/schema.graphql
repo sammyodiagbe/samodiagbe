@@ -11,6 +11,7 @@ type Post
   postTitle: String!
   postBody: ID!
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  owner: String
 }
 
 type Comment

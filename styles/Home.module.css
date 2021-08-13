@@ -15,7 +15,7 @@
 .container textarea {
   padding: 1em;
   margin-bottom: 1em;
-  border: 1px solid dodgerblue;
+  border: 1px solid slateblue;
   resize: none;
   font-size: 1em;
   overflow: hidden;
@@ -23,8 +23,36 @@
 
 .container button {
   padding: 1em;
-  background: purple;
+  background: dodgerblue;
   color: #fff;
   border-radius: 3px;
+}
+
+.container div.contentContainer {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-column-gap: 1em;
+          column-gap: 1em;
+  max-width: 700px;
+}
+
+.container div.contentContainer div.postsContainer {
+  display: -ms-grid;
+  display: grid;
+  row-gap: 1em;
+}
+
+.container div.contentContainer div.postsContainer div.apost {
+  padding: 1em;
+  border: 1px solid dodgerblue;
+  border-radius: 5px;
+  color: #455;
+}
+
+.container div.contentContainer div.postsContainer div.apost h2 {
+  padding-bottom: 1em;
+  color: dodgerblue;
 }
 /*# sourceMappingURL=Home.module.css.map */
