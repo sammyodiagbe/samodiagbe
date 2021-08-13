@@ -10,17 +10,17 @@ export const createPost = /* GraphQL */ `
       id
       postTitle
       postBody
+      owner
       createdAt
       updatedAt
-      owner
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -36,17 +36,17 @@ export const updatePost = /* GraphQL */ `
       id
       postTitle
       postBody
+      owner
       createdAt
       updatedAt
-      owner
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -62,17 +62,17 @@ export const deletePost = /* GraphQL */ `
       id
       postTitle
       postBody
+      owner
       createdAt
       updatedAt
-      owner
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -88,20 +88,20 @@ export const createComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
         id
         postTitle
         postBody
+        owner
         createdAt
         updatedAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -114,20 +114,20 @@ export const updateComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
         id
         postTitle
         postBody
+        owner
         createdAt
         updatedAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -140,20 +140,20 @@ export const deleteComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
         id
         postTitle
         postBody
+        owner
         createdAt
         updatedAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;

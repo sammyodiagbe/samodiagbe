@@ -7,17 +7,17 @@ export const getPost = /* GraphQL */ `
       id
       postTitle
       postBody
+      owner
       createdAt
       updatedAt
-      owner
       comments {
         items {
           id
           postID
           content
+          owner
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -35,9 +35,9 @@ export const listPosts = /* GraphQL */ `
         id
         postTitle
         postBody
+        owner
         createdAt
         updatedAt
-        owner
         comments {
           nextToken
         }
@@ -52,20 +52,20 @@ export const getComment = /* GraphQL */ `
       id
       postID
       content
+      owner
       createdAt
       updatedAt
       post {
         id
         postTitle
         postBody
+        owner
         createdAt
         updatedAt
-        owner
         comments {
           nextToken
         }
       }
-      owner
     }
   }
 `;
@@ -80,17 +80,17 @@ export const listComments = /* GraphQL */ `
         id
         postID
         content
+        owner
         createdAt
         updatedAt
         post {
           id
           postTitle
           postBody
+          owner
           createdAt
           updatedAt
-          owner
         }
-        owner
       }
       nextToken
     }
