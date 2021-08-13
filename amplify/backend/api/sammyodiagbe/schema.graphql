@@ -2,7 +2,11 @@ type Post
   @model
   @auth(
     rules: [
-      { allow: owner, operations: [create, delete, update] }
+      {
+        allow: owner
+        ownerField: "owner"
+        operations: [create, delete, update]
+      }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read] }
     ]
@@ -18,7 +22,11 @@ type Comment
   @model
   @auth(
     rules: [
-      { allow: owner, operations: [create, delete, update] }
+      {
+        allow: owner
+        ownerField: "owner"
+        operations: [create, delete, update]
+      }
       { allow: public, operations: [read], provider: iam }
       { allow: private, operations: [read] }
     ]
