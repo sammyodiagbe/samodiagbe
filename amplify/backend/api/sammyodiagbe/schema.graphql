@@ -28,4 +28,5 @@ type Comment
   postID: ID!
   post: Post @connection(fields: ["postID"])
   content: String!
+  owner: String
 }
