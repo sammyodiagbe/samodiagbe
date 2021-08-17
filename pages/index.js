@@ -16,7 +16,8 @@ export default function Home({ posts }) {
       const response = await API.graphql(
         graphqlOperation(createPost, { input: { postTitle, postBody } })
       );
-      console.log(response);
+      setPostTitle("");
+      setPostBody("");
     } catch (err) {
       console.log("Something went wrong, ", err);
     }
@@ -91,7 +92,6 @@ export const getStaticProps = async (ctx) => {
   let posts = [];
   try {
     const res = await API.graphql({ query: listPosts, authMode: "AWS_IAM" });
-    console.log(res);
     const {
       listPosts: { items },
     } = res.data;
