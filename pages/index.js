@@ -44,7 +44,7 @@ export default function Home({ posts }) {
       </Head>
       <div className={styles.contentContainer}>
         <div className={styles.createPostContainer}>
-          <AmplifySignOut />
+          {/* <AmplifySignOut /> */}
           <form onSubmit={createNewPost}>
             <div>
               <input
@@ -104,6 +104,6 @@ export const getStaticProps = async (ctx) => {
     props: {
       posts,
     },
-    revalidate: 30,
+    revalidate: 10,
   };
 };
