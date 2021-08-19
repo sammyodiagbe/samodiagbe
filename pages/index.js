@@ -12,20 +12,23 @@ export default function Home({ posts: incomingPost }) {
   const [posts, setPosts] = useState([...incomingPost]);
 
   useEffect(() => {
-     const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
-        next: ({ provider, value: { data: {onCreatePost}} }) => {
-          setPosts(posts => [...posts, onCreatePost])
+    const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
+      next: ({
+        _,
+        value: {
+          data: { onCreatePost },
         },
-        error: (error) => console.log(error),
-      });
-    
-   
-   return () => {
-     subscription.unsubscribe();
-   }
+      }) => {
+        setPosts((posts) => [...posts, onCreatePost]);
+      },
+      error: (error) => console.log(error),
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  
   const createNewPost = async (event) => {
     event.preventDefault();
     try {
@@ -40,14 +43,16 @@ export default function Home({ posts: incomingPost }) {
   };
 
   const renderPosts = posts.length ? (
-    posts.map((post, index) => {
-      return (
-        <div className={styles.apost} key={index}>
-          <h2>{post.postTitle}</h2>
-          <p>{post.postBody}</p>
-        </div>
-      );
-    })
+    posts
+      .sort((a, b) => b.createdAt.localeCompare(a.createAt))
+      .map((post, index) => {
+        return (
+          <div className={styles.apost} key={index}>
+            <h2>{post.postTitle}</h2>
+            <p>{post.postBody}</p>
+          </div>
+        );
+      })
   ) : (
     <p>No posts oo</p>
   );
