@@ -37,7 +37,6 @@ export default function Home({ posts: incomingPost }) {
       }) => {
         const { id } = onDeletePost;
         const newPost = [...posts].filter((post) => {
-          console.log(post);
           return post.id !== id;
         });
         setPosts(newPost);
