@@ -14,10 +14,16 @@ export default function Home({ posts: incomingPost }) {
   useEffect(() => {
     setPosts(incomingPost);
     API.graphql(graphqlOperation(onCreatePost)).subscribe({
-      next: ({ provider, value }) => console.log({ provider, value }),
+      next: ({ provider, value: { data} }) => addPostToStackOfPosts(data),
       error: (error) => console.log(error),
     });
   }, [posts]);
+
+  const addPostToStackOfPosts = (post) => {
+    const newposts = [...posts];
+    newposts.push(post)
+    setPosts(newposts)
+  }
   const createNewPost = async (event) => {
     event.preventDefault();
     try {
