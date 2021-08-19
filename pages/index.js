@@ -9,28 +9,21 @@ import { onCreatePost } from "../src/graphql/subscriptions";
 export default function Home({ posts: incomingPost }) {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([...incomingPost]);
 
   useEffect(() => {
-    () => {
-      setPosts(incomingPost);
       API.graphql(graphqlOperation(onCreatePost)).subscribe({
         next: ({ provider, value: { data: {onCreatePost}} }) => {
-          addPostToStackOfPosts(onCreatePost)
+          setPosts(posts => [...posts, onCreatePost])
         },
         error: (error) => console.log(error),
       });
-    }
+    
    
    
-  }, [posts]);
+  }, []);
 
-  const addPostToStackOfPosts = (post) => {
-    const newposts = [...posts];
-    console.log(newposts)
-    newposts.unshift(post)
-    setPosts(newposts)
-  }
+  
   const createNewPost = async (event) => {
     event.preventDefault();
     try {
