@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect } from "react";
-import { createPost } from "../src/graphql/mutations";
+import { createPost, deletePost } from "../src/graphql/mutations";
 import { listPosts } from "../src/graphql/queries";
 import { API, graphqlOperation, withSSRContext, Auth } from "aws-amplify";
 import { onCreatePost } from "../src/graphql/subscriptions";
@@ -12,6 +12,7 @@ export default function Home({ posts: incomingPost }) {
   const [posts, setPosts] = useState([...incomingPost]);
 
   useEffect(() => {
+    console.log("use effect is called over and over");
     const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
       next: ({
         _,
@@ -24,10 +25,10 @@ export default function Home({ posts: incomingPost }) {
       error: (error) => console.log(error),
     });
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [posts]);
+    // return () => {
+    //   subscription.unsubscribe();
+    // };
+  }, []);
 
   const createNewPost = async (event) => {
     event.preventDefault();
@@ -42,6 +43,16 @@ export default function Home({ posts: incomingPost }) {
     }
   };
 
+  const deletePost_ = async (id) => {
+    try {
+      const deletepost = await API.graphql(
+        graphqlOperation(deletePost, { input: { id: id } })
+      );
+    } catch (err) {
+      console.log("Something went wrong while trying to delete post, ", err);
+    }
+  };
+
   const renderPosts = posts.length ? (
     posts
       .sort((a, b) => b.createdAt.localeCompare(a.createAt))
@@ -50,6 +61,9 @@ export default function Home({ posts: incomingPost }) {
           <div className={styles.apost} key={index}>
             <h2>{post.postTitle}</h2>
             <p>{post.postBody}</p>
+            <div>
+              <button onClick={() => deletePost_(post.id)}>Delete post</button>
+            </div>
           </div>
         );
       })

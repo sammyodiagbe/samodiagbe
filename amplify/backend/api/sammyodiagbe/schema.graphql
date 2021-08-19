@@ -16,6 +16,7 @@ type Post
   postBody: ID!
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
   owner: String
+  # version: Int!
 }
 
 type Comment
@@ -37,4 +38,5 @@ type Comment
   post: Post @connection(fields: ["postID"])
   content: String!
   owner: String
+  # version: Int!
 }
