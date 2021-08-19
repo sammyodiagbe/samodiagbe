@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPost, deletePost } from "../src/graphql/mutations";
 import { listPosts } from "../src/graphql/queries";
 import { API, graphqlOperation, withSSRContext, Auth } from "aws-amplify";
-import { onCreatePost } from "../src/graphql/subscriptions";
+import { onCreatePost, onDeletePost } from "../src/graphql/subscriptions";
 
 export default function Home({ posts: incomingPost }) {
   const [postTitle, setPostTitle] = useState("");
@@ -12,8 +12,9 @@ export default function Home({ posts: incomingPost }) {
   const [posts, setPosts] = useState([...incomingPost]);
 
   useEffect(() => {
-    console.log("use effect is called over and over");
-    const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
+    const createusersubscription = API.graphql(
+      graphqlOperation(onCreatePost)
+    ).subscribe({
       next: ({
         _,
         value: {
@@ -25,9 +26,29 @@ export default function Home({ posts: incomingPost }) {
       error: (error) => console.log(error),
     });
 
-    // return () => {
-    //   subscription.unsubscribe();
-    // };
+    const deletepostsubscription = API.graphql(
+      graphqlOperation(onDeletePost)
+    ).subscribe({
+      next: ({
+        _,
+        value: {
+          data: { onDeletePost },
+        },
+      }) => {
+        const { id } = onDeletePost;
+        const newPost = [...posts].filter((post) => {
+          console.log(post);
+          return post.id !== id;
+        });
+        setPosts(newPost);
+      },
+      error: (err) => console.log("Something went wrong, ", err),
+    });
+
+    return () => {
+      createusersubscription.unsubscribe();
+      deletepostsubscription.unsubscribe();
+    };
   }, []);
 
   const createNewPost = async (event) => {
