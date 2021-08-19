@@ -14,14 +14,18 @@ export default function Home({ posts: incomingPost }) {
   useEffect(() => {
     setPosts(incomingPost);
     API.graphql(graphqlOperation(onCreatePost)).subscribe({
-      next: ({ provider, value: { data} }) => addPostToStackOfPosts(data),
+      next: ({ provider, value: { data: {onCreatePost}} }) => {
+        console.log( onCreatePost)
+        addPostToStackOfPosts(onCreatePost)
+      },
       error: (error) => console.log(error),
     });
   }, [posts]);
 
   const addPostToStackOfPosts = (post) => {
     const newposts = [...posts];
-    newposts.push(post)
+    console.log(newposts)
+    newposts.unshift(post)
     setPosts(newposts)
   }
   const createNewPost = async (event) => {
@@ -118,6 +122,6 @@ export const getStaticProps = async (ctx) => {
     props: {
       posts,
     },
-    revalidate: 1,
+    // revalidate: 1,
   };
 };
