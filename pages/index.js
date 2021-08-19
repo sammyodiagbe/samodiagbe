@@ -12,7 +12,7 @@ export default function Home({ posts: incomingPost }) {
   const [posts, setPosts] = useState([...incomingPost]);
 
   useEffect(() => {
-      API.graphql(graphqlOperation(onCreatePost)).subscribe({
+     const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
         next: ({ provider, value: { data: {onCreatePost}} }) => {
           setPosts(posts => [...posts, onCreatePost])
         },
@@ -20,7 +20,9 @@ export default function Home({ posts: incomingPost }) {
       });
     
    
-   
+   return () => {
+     subscription.unsubscribe();
+   }
   }, []);
 
   
