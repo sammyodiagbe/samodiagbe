@@ -4,12 +4,20 @@ import { useState, useEffect } from "react";
 import { createPost } from "../src/graphql/mutations";
 import { listPosts } from "../src/graphql/queries";
 import { API, graphqlOperation, withSSRContext, Auth } from "aws-amplify";
-import { AmplifySignOut } from "@aws-amplify/ui-react";
+import { onCreatePost } from "../src/graphql/subscriptions";
 
-export default function Home({ posts }) {
+export default function Home({ posts: incomingPost }) {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    setPosts[incomingPost];
+    API.graphql(graphqlOperation(onCreatePost)).subscribe({
+      next: ({ provider, value }) => console.log({ provider, value }),
+      error: (error) => console.log(error),
+    });
+  }, [posts]);
   const createNewPost = async (event) => {
     event.preventDefault();
     try {
