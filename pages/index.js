@@ -104,6 +104,6 @@ export const getStaticProps = async (ctx) => {
     props: {
       posts,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
