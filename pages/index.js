@@ -27,7 +27,7 @@ export default function Home({ posts: incomingPost }) {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [posts]);
 
   const createNewPost = async (event) => {
     event.preventDefault();
