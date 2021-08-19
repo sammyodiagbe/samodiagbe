@@ -12,7 +12,7 @@ export default function Home({ posts: incomingPost }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    setPosts[incomingPost];
+    setPosts(incomingPost);
     API.graphql(graphqlOperation(onCreatePost)).subscribe({
       next: ({ provider, value }) => console.log({ provider, value }),
       error: (error) => console.log(error),
