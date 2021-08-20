@@ -5,5 +5,20 @@ users can also send me direct mails and messages
 
 models
     messages
+        message_title
+        message_body
+        message_time
+        by_who
     posts
+        post_title
+        post_body
+        post_time
+        post_category
+        post_likes
+        comments: [comments]
     comments
+
+        comment_body
+        by_who
+        comment_time
+        post: Post!
