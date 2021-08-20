@@ -1,0 +1,9 @@
+An app that showcases my works and also allows me share blog post, where people can like and also comment.
+
+annonymous users can be stored on each device using the local Storage
+users can also send me direct mails and messages
+
+models
+    messages
+    posts
+    comments
