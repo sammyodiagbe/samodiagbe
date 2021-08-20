@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  
   return (
     <div className={styles.container}>
       <Head>
@@ -10,7 +9,8 @@ export default function Home() {
         <meta name="description" content="Sam Odiagbe blog" />
         <meta name="author" content="Sam Odiagbe" />
       </Head>
-      
+      <div className={styles.illustration}></div>
+      <div className={styles.mainContent}></div>
     </div>
   );
 }
