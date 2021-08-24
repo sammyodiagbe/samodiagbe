@@ -9,7 +9,10 @@ export default function Home() {
         <meta name="description" content="Sam Odiagbe" />
         <meta name="author" content="Sam Odiagbe" />
       </Head>
-      <div className={styles.illustration}></div>
+      <div className={styles.illustration}>
+        <h1>Salut, I am Sam</h1>
+        <h3>A curious weirdo</h3>
+      </div>
       <div className={styles.mainContent}></div>
     </div>
   );
